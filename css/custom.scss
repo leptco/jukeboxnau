@@ -2,17 +2,35 @@
 variables
 **/
 $navbar-w: 70px;
+$navbar-w-max: 160px;
+$dot-w: 24px;
+$play-btn-w: 6px;
+$play-btn-h: 40px;
 
 $color-white: #fff;
 $color-txt-h: #49413f;
 $tp-color-2: rgba(255, 255, 255, 0.2);
 $tp-color-4: rgba(223, 201, 178, 0.4);
 
+$media-destop: 991px;
+$media-tablet: 768px;
+$media-mobile: 480px;
+$media-mobile-sm: 320px;
 /** 
 Reset--------------------------------------------
 **/
+body{
+	font-size: 1.5em;
+	line-height: 1.6;
+    font-weight: 400;
+}
+li{
+	list-style: none;
+}
 .container{
-	width: 768px;
+	@media screen and (min-width: 991px){
+		width: 768px;
+	}
 }
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   	color: rgba(0, 0, 0, 0.3);
@@ -67,12 +85,23 @@ End Reset--------------------------------------------
 	&__list{
 		display: flex;
 		padding-top: 15px;
+		@media screen and (max-width: $media-mobile){
+			flex-flow: wrap;
+			justify-content: center;
+		}
 	}
 	&__item--input{
 		margin-left: 64px;
+		@media screen and (max-width: $media-mobile){
+			margin-left: 0;
+			width: 100%;
+		}
 	}
 	&__img{
 		height: 40px;
+	}
+	@media screen and (max-width: $media-mobile){
+		height: $navbar-w-max;
 	}
 }
 
@@ -83,6 +112,9 @@ End Reset--------------------------------------------
 	border-radius: 4px;
 	overflow: hidden;
 	border: 1px solid $tp-color-2;
+	@media screen and (max-width: $media-mobile){
+		margin: 10px 0 7px;
+	}
 	&.focus {
 		background-color: rgba(255, 255, 255, 0.8);
 		border-color: rgba(0, 0, 0, 0.4);
@@ -118,25 +150,28 @@ End Reset--------------------------------------------
 
 //button play
 .play-button{
-	$play-btn-w: 6px;
-	$play-btn-h: 40px;
 	position: relative;
     width: $play-btn-h;
     height: $play-btn-h;
     margin-left: 60px;
     cursor: pointer;
+    @media screen and (max-width: $media-mobile){
+    	margin-left: 0px;
+    }
+    &:hover{
+    	.play-button__item{
+    		background-color: lightgray;
+    	}
+    }
 	&.play, &.pause{
 		transition:1s;
-	}
-	.pause{
-		
 	}
 	&__item{
 		border-radius:$play-btn-w / 2;
 		background:#fff;
 		transition:.5s;
 		position:absolute;
-
+    	transition: all .3s;
 	}
 	&__top{
 		width: $play-btn-h;
@@ -189,5 +224,172 @@ End Reset--------------------------------------------
 	  .play-button__left{
 	    transform:translateX($play-btn-w) scaleY(.8);
 	  }
+	}
+}
+
+.host{
+	position: absolute;
+	top: 20px;
+    left: 25px;
+    cursor: pointer;
+	.dot{
+		width: $dot-w;
+		height: $dot-w;
+		border-radius: 50%;
+		background-color: rgba(255, 255, 255, 0.3);
+		position: relative;
+		transition: all .3s;
+		&:after{
+			content: 'host';
+			position: absolute;
+			left: 40px;
+			color: $color-white;
+			transform: translate(-100%) scaleX(-1);
+			opacity: 0;
+			transition: all .3s;
+			font-size: 15px;
+		}
+		&:hover{
+			background-color: rgba(255, 255, 255, 1);
+			&::after{
+				opacity: 1;
+				transform: translate(0) scaleX(1);
+			}
+		}
+	}
+}
+
+.git-bg{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 0;
+	height: 0;
+	border-top: 70px solid #151513;
+	border-left: 70px solid transparent;
+}
+
+.tab{
+	width: 100%;
+	margin-top: $navbar-w;
+	position: relative;
+	@media screen and (max-width: $media-mobile){
+		margin-top: $navbar-w-max;
+	}
+	&__collapse{
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		z-index: 200;
+	}
+	&__header{
+		//position: fixed;
+		width: 100%;
+		z-index: 100;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+		@media screen and (max-width: $media-mobile){
+			position: absolute;
+			z-index: 199;
+			background: #eff1e2;
+		}
+		.nav-play-list{
+			margin-bottom: 0;
+			display: flex;
+			flex-flow: wrap;
+			@media screen and (max-width: $media-tablet){
+				justify-content: center;
+			}	
+			&__item{
+				padding: 15px;
+				margin-bottom: 0;
+				position: relative;
+				transition: all .5s;
+				cursor: pointer;
+				a{
+					color: black;
+					opacity: .5;
+					transition: all .5s;
+				}
+				&::after{
+					content: '';
+					position: absolute;
+					bottom: 0;
+					font-weight: 600;
+					display: block;
+					left: 50%;
+					height: 2px;
+				    width: 14px;
+				    bottom: 7px;
+				    opacity: 0;
+				    transition: all .5s;
+					background-color: $color-txt-h;
+					transform: translateX(-50%);
+				}
+				&:hover{
+					background-color: whitesmoke;
+					a{
+						opacity: 1;
+					}
+				}
+				&.is-active{
+					&::after, a{
+						opacity: 1;
+					}
+				}
+			}
+			@media screen and (max-width: $media-mobile){
+				flex-direction: column;
+			}
+		}
+	}
+	.song{
+		margin-top: 30px;
+		&__item{
+			display: flex;
+			flex-flow: wrap;
+			&.playing{
+				.song__item--info > i{
+					color: brown;
+				}
+			}
+			&.selected{
+				.song__item--info > i{
+					opacity: .5;
+				}
+			}
+			&--info{
+				display: flex;
+				align-items: center;
+			}
+			&--avt{
+				margin-left: 13px;
+			}
+			&--link{
+				text-overflow: ellipsis;
+			    white-space: nowrap;
+			    overflow: hidden;
+			    width: 80%;
+			    margin-left: 15px;
+			}
+			&--control{
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
+				a{
+					padding: 0 8px;
+					color: gray;
+					&:hover{
+						color: #755f4b;
+					}
+				}
+				@media screen and (max-width: $media-mobile){
+					justify-content: flex-start;
+				}
+			}
+			&--time{
+				margin-right: 15px;
+				font-size: 13px;
+			}
+		}
 	}
 }

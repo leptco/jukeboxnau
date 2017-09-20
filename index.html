@@ -20,12 +20,15 @@
   <link rel="icon" type="image/png" href="images/favicon.ico">
   <!--Fotawesome-->
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
   <nav class="navbar">
       <div class="host">
         <div class="dot"></div>
       </div>
+      <a href="#" class="git-bg">
+      </a>
       <div class="container">
         <div class="row">
           <div class="navbar__list">
@@ -56,6 +59,57 @@
         </div>
       </div>
   </nav>
+  <div class="tab">
+    <button class="tab__collapse"><i class="fa fa-bars" aria-hidden="true"></i></button>
+    <div class="tab__header">
+      <div class="container">
+        <ul class="nav-play-list">
+          <li class="nav-play-list__item">
+            <a href="#play-list">Play List</a>
+          </li>
+          <li class="nav-play-list__item">
+            <a href="#play-list">Yesterday</a>
+          </li>
+          <li class="nav-play-list__item">
+            <a href="#play-list">Last 7 day</a>
+          </li>
+          <li class="nav-play-list__item">
+            <a href="#play-list">Top Lists</a>
+          </li>
+          <li class="nav-play-list__item">
+            <a href="#play-list">Users</a>
+          </li>
+          <li class="nav-play-list__item">
+            <a href="#play-list">Sign in</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="tab__body song">
+      <div class="container">
+        <ul class="song__list">
+          <li class="row song__item playing">
+            <div class="col col--8 song__item--info">
+              <i class="fa fa-caret-right song__item--mark" aria-hidden="true"></i>
+              <div class="song__item--avt">
+                <img src="https://thumbs.dreamstime.com/t/imge-mint-closeup-green-leaves-texture-background-72159554.jpg" width="40" height="40" alt="image song">
+              </div> 
+              <a href="#" class="song__item--link" title="Hương Tràm - Em Gái Mưa ( Anh Khang Cover ) - YouTube">Hương Tràm - Em Gái Mưa ( Anh Khang Cover ) - YouTubeTràm - Em Gái Mưa ( Anh Khang Cover ) - YouTube</a>
+            </div>
+            <div class="col col--4 song__item--control">
+              <div class="song__item--time">4 hours ago</div>
+              <a href="#" class="song__item--lyric">
+               <i class="fa fa-file-text" aria-hidden="true"></i>
+              </a> 
+              <a href="#"  class="song__item--repeat">
+               <i class="fa fa-retweet" aria-hidden="true"></i>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </body>
 <script>
   
