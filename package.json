@@ -1,0 +1,16 @@
+{
+  "name": "nau-jukebox-template",
+  "license": "MIT",
+  "repository": "https://github.com/leptco/jukeboxnau",
+  "scripts": {
+    "stylelint": "stylelint css/**/*.scss",
+    "eslint": "eslint --cache .",
+    "sass": "node-sass --source-map true --watch css/ --output css/"
+  },
+  "devDependencies": {
+    "eslint": "^4.7.1",
+    "node-sass": "^4.5.3",
+    "stylelint": "^8.1.1",
+    "stylelint-config-standard": "^17.0.0"
+  }
+}
