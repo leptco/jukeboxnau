@@ -1,8 +1,10 @@
 /**
 variables
 **/
-$navbar-w: 70px;
-$navbar-w-max: 160px;
+$navbar-h: 70px;
+$navbar-h-max: 180px;
+$tabnav-h: 55px;
+
 $dot-w: 24px;
 $play-btn-w: 6px;
 $play-btn-h: 40px;
@@ -21,6 +23,8 @@ $color-3: #755f4b;
 $color-4: #f5b043;
 $color-5: #49413f;
 $color-6: #eff1e2;
+$color-7: #a8896c;
+$color-8: #347a2a;
 
 $tp-color-w-2: rgba(255, 255, 255, 0.2);
 $tp-color-w-3: rgba(255, 255, 255, 0.3);
@@ -46,11 +50,16 @@ body {
 	font-size: 1.5em;
 	line-height: 1.6;
 	font-weight: 400;
+	overflow-x: hidden;
 	font-family: Raleway, HelveticaNeue, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 li {
 	list-style: none;
+}
+
+button {
+	cursor: pointer;
 }
 
 figure {
@@ -121,13 +130,14 @@ End Mixin--------------------------------------------
 
 // navigation
 .navbar {
-	height: $navbar-w;
+	height: $navbar-h;
 	width: 100%;
 	background-image: url('https://static.vecteezy.com/system/resources/previews/000/113/010/non_2x/multicolor-geometric-low-poly-vector-background.jpg');
 	padding-bottom: 0;
 	position: fixed;
 	top: 0;
 	z-index: 300;
+	overflow: hidden;
 	background-size: cover;
 	background-repeat: no-repeat;
 	border-bottom: 1px solid $tp-color-b-2;
@@ -146,6 +156,7 @@ End Mixin--------------------------------------------
 
 	&__item--input {
 		margin-left: 64px;
+		margin-bottom: 5px;
 		@media screen and (max-width: $media-mobile) {
 			margin-left: 0;
 			width: 100%;
@@ -156,7 +167,7 @@ End Mixin--------------------------------------------
 		height: 40px;
 	}
 	@media screen and (max-width: $media-mobile) {
-		height: $navbar-w-max;
+		height: $navbar-h-max;
 	}
 }
 
@@ -304,6 +315,7 @@ End Mixin--------------------------------------------
 	position: absolute;
 	top: 20px;
 	left: 25px;
+	z-index: 1000;
 	cursor: pointer;
 
 	.dot {
@@ -338,10 +350,10 @@ End Mixin--------------------------------------------
 
 .tab {
 	width: 100%;
-	margin-top: $navbar-w;
+	margin-top: $navbar-h;
 	position: relative;
 	@media screen and (max-width: $media-mobile) {
-		margin-top: $navbar-w-max;
+		margin-top: $navbar-h-max;
 	}
 
 	&__collapse {
@@ -349,17 +361,38 @@ End Mixin--------------------------------------------
 		top: 10px;
 		right: 10px;
 		z-index: 200;
+		background: transparent;
+		border: 1px solid $tp-color-b-3;
+		border-radius: 3px;
+		display: none;
+
+		&--close {
+			i::before {
+				content: '\f00d';
+			}
+		}
+
+		@media screen and (max-width: $media-mobile) {
+			display: block;
+		}
 	}
 
-	&__header {
-		//position: fixed;
+	&__nav {
+		position: fixed;
 		width: 100%;
 		z-index: 100;
+		background-color: $color-white;
 		border-bottom: 1px solid $tp-color-b-1;
 		@media screen and (max-width: $media-mobile) {
 			position: absolute;
 			z-index: 199;
 			background: $color-6;
+			transform: translateX(100%);
+			transition: all 0.3s;
+
+			&--open {
+				transform: translateX(0);
+			}
 		}
 
 		.nav-play-list {
@@ -372,12 +405,7 @@ End Mixin--------------------------------------------
 			}
 			@media screen and (max-width: $media-mobile) {
 				flex-direction: column;
-				height: 0;
 				overflow: hidden;
-
-				&.open {
-					//animation: mymove 5s alternate;
-				}
 			}
 
 			&__item {
@@ -414,21 +442,29 @@ End Mixin--------------------------------------------
 					a {
 						opacity: 1;
 					}
+
+					@media screen and (max-width: $media-mobile) {
+						text-align: center;
+						background-color: transparent;
+					}
 				}
 
-				&.is-active {
+				&--active {
 					&::after, a {
 						opacity: 1;
 					}
+				}
+
+				@media screen and (max-width: $media-mobile) {
+					text-align: center;
 				}
 			}
 		}
 	}
 
 	.song {
-		margin-top: 30px;
-
-		> div {
+		&__container {
+			top: $tabnav-h + 20px;
 			@media screen and (max-width: $media-mobile) {
 				top: 50px;
 			}
@@ -491,6 +527,7 @@ End Mixin--------------------------------------------
 
 			&__time {
 				margin-right: 15px;
+				margin-left: 18px;
 				font-size: 13px;
 			}
 
@@ -502,13 +539,23 @@ End Mixin--------------------------------------------
 	}
 
 	.top-song {
+		&__container {
+			top: $tabnav-h + 30px;
+			@media screen and (max-width: $media-mobile) {
+				top: 42px;
+			}
+		}
+
 		&__list {
 			flex-flow: wrap;
 		}
 
 		&__title {
+			margin-bottom: 32px;
+
 			span {
 				font-size: 14px;
+				margin-left: 5px;
 				font-weight: normal;
 			}
 		}
@@ -531,15 +578,16 @@ End Mixin--------------------------------------------
 				}
 			}
 
+			@media screen and (max-width: $media-mobile) {
+				&:nth-child(n) {
+					margin-left: 15px;
+				}
+			}
+
 			&__img {
 				width: 100%;
 				padding-bottom: 100%;
 				position: relative;
-				box-shadow: none !important;
-				-webkit-transform: translateZ(0);
-				transform: translateZ(0);
-				-webkit-box-sizing: padding-box;
-				box-sizing: padding-box;
 
 				img {
 					position: absolute;
@@ -548,74 +596,31 @@ End Mixin--------------------------------------------
 					object-fit: cover;
 				}
 
-				.border {
+				&::after {
 					position: absolute;
-					opacity: 0.45;
-
-					&::after,
-					&::before {
-						width: 1px;
-						height: 0;
-					}
-
-					&::after,
-					&::before,
-					div::before,
-					div::after {
-						background-color: $color-4;
-						position: absolute;
-						content: '';
-						display: block;
-						-webkit-transition: all 0.4s ease-in-out;
-						transition: all 0.4s ease-in-out;
-					}
-
-					.one {
-						left: 0;
-						top: 0;
-						right: 12px;
-						bottom: 12px;
-
-						&::before,
-						div::before {
-							left: 0;
-							top: 0;
-						}
-
-						&::after,
-						div::after {
-							bottom: 0;
-							right: 0;
-						}
-					}
-
-					.two {
-						left: 12px;
-						top: 12px;
-						right: 0;
-						bottom: 0;
-
-						&::before,
-						div::before {
-							right: 0;
-							top: 0;
-						}
-
-						&::after,
-						div::after {
-							bottom: 0;
-							left: 0;
-						}
-					}
+					top: 7.5px;
+					right: 7.5px;
+					bottom: 7.5px;
+					left: 7.5px;
+					border: 2px solid $color-white;
+					box-shadow: 0 0 0 15px $tp-color-w-2;
+					content: '';
+					opacity: 0;
+					-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+					transition: opacity 0.35s, transform 0.35s;
+					-webkit-transform: scale3d(1.4, 1.4, 1);
+					transform: scale3d(1.4, 1.4, 1);
 				}
 
 				&:hover {
-					.border::before, .border::after {
-						width: 100%;
+					&::after {
+						opacity: 1;
+						-webkit-transform: scale3d(1, 1, 1);
+						transform: scale3d(1, 1, 1);
 					}
 
-					.border div::before, .border div::after {
-						height: 100%;
+					.top-song__item__count {
+						color: $tp-color-w-8;
 					}
 				}
 			}
@@ -626,10 +631,12 @@ End Mixin--------------------------------------------
 				left: 14px;
 				margin-bottom: 0;
 				color: $tp-color-w-5;
+				transition: all 0.3s;
 			}
 
 			&__title {
 				text-align: left;
+				font-style: normal;
 
 				h6 {
 					@include text-overflow;
@@ -644,6 +651,77 @@ End Mixin--------------------------------------------
 				font-size: 14px;
 				opacity: 0.7;
 				margin-top: -5px;
+				margin-bottom: 15px;
+			}
+		}
+	}
+
+	.users {
+		&__container {
+			top: $tabnav-h + 30px;
+			@media screen and (max-width: $media-mobile) {
+				top: 42px;
+			}
+		}
+		&__item {
+			display: flex;
+			align-items: center;
+			position: relative;
+
+			&::before {
+				content: '';
+				width: 8px;
+				height: 8px;
+				position: absolute;
+				left: 0;
+				border-radius: 100%;
+				background-color: $color-4;
+			}
+
+			&__avt {
+				margin-left: 15px;
+				margin-right: 6px;
+			}
+
+			&__info {
+				display: flex;
+				flex-flow: wrap;
+				width: 80%;
+				margin-top: -6px;
+				@media screen and (max-width: $media-mobile) {
+					flex-direction: column;
+					align-items: flex-start;
+
+					.users__item__coin {
+						margin-left: 0;
+					}
+				}
+			}
+
+			&__name {
+				@include text-overflow;
+
+				width: 60%;
+				margin-bottom: 0;
+				margin-right: 10px;
+			}
+
+			&__coin {
+				background-color: $color-7;
+				border-radius: 2px;
+				padding: 0 6px;
+				color: $color-white;
+
+				&::before {
+					content: '₦';
+					margin-right: 4px;
+				}
+			}
+
+			&--active {
+				&::before {
+					background-color: $color-8;
+				}
 			}
 		}
 	}

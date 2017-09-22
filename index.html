@@ -95,10 +95,10 @@
     		<i class="fa fa-bars" aria-hidden="true"></i>
     	</button>
 
-	    <nav class="tab__header">
+	    <nav class="tab__nav">
 			<div class="container">
 				<ul class="nav-play-list">
-					<li class="nav-play-list__item">
+					<li class="nav-play-list__item nav-play-list__item--active">
 						<a href="#play-list">Play List</a>
 					</li>
 					<li class="nav-play-list__item">
@@ -120,8 +120,8 @@
 			</div><!-- /.container -->
 	    </nav><!-- /.tab__header -->
 
-	    <section class="tab__body song">
-			<div class="container">
+		<section class="tab__body song">
+			<div class="container song__container">
 				<ul class="song__list">
 					<li class="row song__item song__item--playing">
 						<div class="col col--8 song__item__info">
@@ -145,8 +145,37 @@
 			</div><!-- /.container -->
 	    </section><!-- /.tab__body song -->
 
+		<section class="tab__body users">
+			<div class="container users__container">
+				<h5 class="users__title">
+		        	Users
+		        </h5>
+				<ul class="users__list">
+					<li class="row users__item users__item--active">
+						<img src="https://thumbs.dreamstime.com/t/imge-mint-closeup-green-leaves-texture-background-72159554.jpg" width="50" height="50" alt="image user" class="users__item__avt">
+						<div class="users__item__info">
+							<p class="users__item__name">Mondo Records Mondo Records Records Mondo Records</p>
+							<span class="users__item__coin">
+								2.00
+							</span>
+						</div><!-- /.users__item__info -->
+					</li><!-- /.users__item -->
+
+					<li class="row users__item">
+						<img src="https://thumbs.dreamstime.com/t/imge-mint-closeup-green-leaves-texture-background-72159554.jpg" width="50" height="50" alt="image user" class="users__item__avt">
+						<div class="users__item__info">
+							<p class="users__item__name">Mondo Records Mondo Records Records Mondo Records</p>
+							<span class="users__item__coin">
+								2.00
+							</span>
+						</div><!-- /.users__item__info -->
+					</li><!-- /.users__item -->
+				</ul><!-- /.users__list -->
+			</div><!-- /.container -->
+	    </section><!-- /.tab__body user -->
+
     	<section class="tab__body top-song">
-    		<div class="container">
+    		<div class="container top-song__container">
 		        <h5 class="top-song__title">
 		        	Top Songs
 					<span>
@@ -167,7 +196,7 @@
 									CHO HỌ GHÉT ĐI EM (OFFICIAL MV) - HUỲNH JAMES
 								</h6>
 								<p class="top-song__item__author">
-									Mondo Records
+									Mondo Records Mondo Records
 								</p>
 							</figcaption>
 						</figure>
@@ -247,8 +276,19 @@
 		        </ul><!-- /.flex-grid top-song__list -->
     		</div><!-- /.container -->
     	</section><!-- /.tab__body top-song -->
+
 	</main><!-- /.tab -->
 </body>
 <script>
+
+$(document).ready(function() {
+
+	$('.tab__collapse').on('click', function() {
+		$('.tab__nav').toggleClass('tab__nav--open');
+		$(this).toggleClass('tab__collapse--close');
+	});
+});
+
+
 </script>
 </html>
