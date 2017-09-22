@@ -239,7 +239,7 @@ End Mixin--------------------------------------------
     display: none; }
     .tab__collapse--close i::before {
       content: '\f00d'; }
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 768px) {
       .tab__collapse {
         display: block; } }
   .tab__nav {
@@ -248,9 +248,8 @@ End Mixin--------------------------------------------
     z-index: 100;
     background-color: #fff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 768px) {
       .tab__nav {
-        position: absolute;
         z-index: 199;
         background: #eff1e2;
         transform: translateX(100%);
@@ -264,9 +263,7 @@ End Mixin--------------------------------------------
       transition: height 0.5s; }
       @media screen and (max-width: 768px) {
         .tab__nav .nav-play-list {
-          justify-content: center; } }
-      @media screen and (max-width: 480px) {
-        .tab__nav .nav-play-list {
+          justify-content: center;
           flex-direction: column;
           overflow: hidden; } }
       .tab__nav .nav-play-list__item {
@@ -296,13 +293,13 @@ End Mixin--------------------------------------------
           background-color: #f5f5f5; }
           .tab__nav .nav-play-list__item:hover a {
             opacity: 1; }
-          @media screen and (max-width: 480px) {
+          @media screen and (max-width: 768px) {
             .tab__nav .nav-play-list__item:hover {
               text-align: center;
               background-color: transparent; } }
         .tab__nav .nav-play-list__item--active::after, .tab__nav .nav-play-list__item--active a {
           opacity: 1; }
-        @media screen and (max-width: 480px) {
+        @media screen and (max-width: 768px) {
           .tab__nav .nav-play-list__item {
             text-align: center; } }
   .tab .song__container {
@@ -435,6 +432,14 @@ End Mixin--------------------------------------------
     @media screen and (max-width: 480px) {
       .tab .users__container {
         top: 42px; } }
+  .tab .users__title span {
+    float: right;
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 10px; }
+    @media screen and (max-width: 480px) {
+      .tab .users__title span {
+        margin-top: 5px; } }
   .tab .users__item {
     display: flex;
     align-items: center;

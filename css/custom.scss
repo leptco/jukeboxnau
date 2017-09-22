@@ -38,7 +38,7 @@ $tp-color-12: rgba(245, 245, 245, 0.3);
 
 /* stylelint-enable color-no-hex */
 
-$media-destop: 991px;
+$media-desktop: 991px;
 $media-tablet: 768px;
 $media-mobile: 480px;
 $media-mobile-sm: 320px;
@@ -68,7 +68,7 @@ figure {
 }
 
 .container {
-	@media screen and (min-width: 991px) {
+	@media screen and (min-width: $media-desktop) {
 		width: 768px;
 	}
 }
@@ -372,7 +372,7 @@ End Mixin--------------------------------------------
 			}
 		}
 
-		@media screen and (max-width: $media-mobile) {
+		@media screen and (max-width: $media-tablet) {
 			display: block;
 		}
 	}
@@ -383,8 +383,7 @@ End Mixin--------------------------------------------
 		z-index: 100;
 		background-color: $color-white;
 		border-bottom: 1px solid $tp-color-b-1;
-		@media screen and (max-width: $media-mobile) {
-			position: absolute;
+		@media screen and (max-width: $media-tablet) {
 			z-index: 199;
 			background: $color-6;
 			transform: translateX(100%);
@@ -402,10 +401,11 @@ End Mixin--------------------------------------------
 			transition: height 0.5s;
 			@media screen and (max-width: $media-tablet) {
 				justify-content: center;
-			}
-			@media screen and (max-width: $media-mobile) {
 				flex-direction: column;
 				overflow: hidden;
+			}
+			@media screen and (max-width: $media-mobile) {
+
 			}
 
 			&__item {
@@ -443,7 +443,7 @@ End Mixin--------------------------------------------
 						opacity: 1;
 					}
 
-					@media screen and (max-width: $media-mobile) {
+					@media screen and (max-width: $media-tablet) {
 						text-align: center;
 						background-color: transparent;
 					}
@@ -455,7 +455,7 @@ End Mixin--------------------------------------------
 					}
 				}
 
-				@media screen and (max-width: $media-mobile) {
+				@media screen and (max-width: $media-tablet) {
 					text-align: center;
 				}
 			}
@@ -663,6 +663,19 @@ End Mixin--------------------------------------------
 				top: 42px;
 			}
 		}
+
+		&__title {
+			span {
+				float: right;
+				font-size: 14px;
+				font-weight: normal;
+				margin-top: 10px;
+				@media screen and (max-width: $media-mobile) {
+					margin-top: 5px;
+				}
+			}
+		}
+
 		&__item {
 			display: flex;
 			align-items: center;
