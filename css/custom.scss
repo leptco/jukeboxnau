@@ -4,6 +4,7 @@ variables
 $navbar-h: 70px;
 $navbar-h-max: 180px;
 $tabnav-h: 55px;
+$popup-lyric-h: 90px;
 
 $dot-w: 24px;
 $play-btn-w: 6px;
@@ -33,6 +34,7 @@ $tp-color-w-8: rgba(255, 255, 255, 0.8);
 $tp-color-b-1: rgba(0, 0, 0, 0.1);
 $tp-color-b-2: rgba(0, 0, 0, 0.2);
 $tp-color-b-3: rgba(0, 0, 0, 0.3);
+$tp-color-b-5: rgba(0, 0, 0, 0.3);
 $tp-color-11: rgba(223, 201, 178, 0.4);
 $tp-color-12: rgba(245, 245, 245, 0.3);
 
@@ -357,8 +359,8 @@ End Mixin--------------------------------------------
 	}
 
 	&__collapse {
-		position: absolute;
-		top: 10px;
+		position: fixed;
+		margin-top: 10px;
 		right: 10px;
 		z-index: 200;
 		background: transparent;
@@ -403,9 +405,6 @@ End Mixin--------------------------------------------
 				justify-content: center;
 				flex-direction: column;
 				overflow: hidden;
-			}
-			@media screen and (max-width: $media-mobile) {
-
 			}
 
 			&__item {
@@ -740,4 +739,70 @@ End Mixin--------------------------------------------
 	}
 }
 
+.popup-lyric {
+	position: fixed;
+	z-index: 1999;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: none;
+	background-color: $tp-color-b-5;
+	transition: all 0.3s;
+
+	&--active {
+		display: block;
+
+		.popup-lyric__wrap {
+			bottom: auto;
+			top: 50%;
+		}
+	}
+
+	&__wrap {
+		position: fixed;
+		bottom: -70vh;
+		left: 50%;
+		width: 50vw;
+		height: 70vh;
+		transform: translate(-50%, -50%);
+		background-color: $color-white;
+		border-radius: 10px;
+		z-index: 2000;
+		overflow: hidden;
+		transition: all 0.5s;
+	}
+
+	&__header {
+		padding: 10px 15px;
+		text-align: center;
+	}
+
+	&__close {
+		font-size: 30px;
+		position: absolute;
+		top: 10px;
+		right: 15px;
+		z-index: 1;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	&__body {
+		text-align: center;
+		max-height: calc(70vh - #{$popup-lyric-h});
+		overflow-y: auto;
+		padding: 15px;
+	}
+
+	&__full {
+		margin-bottom: 0;
+	}
+
+	&__name {
+		font-weight: 400;
+	}
+}
 /* stylelint-enable at-rule-no-unknown */

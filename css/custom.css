@@ -229,8 +229,8 @@ End Mixin--------------------------------------------
     .tab {
       margin-top: 180px; } }
   .tab__collapse {
-    position: absolute;
-    top: 10px;
+    position: fixed;
+    margin-top: 10px;
     right: 10px;
     z-index: 200;
     background: transparent;
@@ -483,6 +483,54 @@ End Mixin--------------------------------------------
         margin-right: 4px; }
     .tab .users__item--active::before {
       background-color: #347a2a; }
+
+.popup-lyric {
+  position: fixed;
+  z-index: 1999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: all 0.3s; }
+  .popup-lyric--active {
+    display: block; }
+    .popup-lyric--active .popup-lyric__wrap {
+      bottom: auto;
+      top: 50%; }
+  .popup-lyric__wrap {
+    position: fixed;
+    bottom: -70vh;
+    left: 50%;
+    width: 50vw;
+    height: 70vh;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 10px;
+    z-index: 2000;
+    overflow: hidden;
+    transition: all 0.5s; }
+  .popup-lyric__header {
+    padding: 10px 15px;
+    text-align: center; }
+  .popup-lyric__close {
+    font-size: 30px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    z-index: 1; }
+    .popup-lyric__close:hover {
+      cursor: pointer; }
+  .popup-lyric__body {
+    text-align: center;
+    max-height: calc(70vh - 90px);
+    overflow-y: auto;
+    padding: 15px; }
+  .popup-lyric__full {
+    margin-bottom: 0; }
+  .popup-lyric__name {
+    font-weight: 400; }
 
 /* stylelint-enable at-rule-no-unknown */
 
