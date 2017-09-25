@@ -73,6 +73,9 @@ End Mixin--------------------------------------------
     opacity: 0.5; }
   100% {
     opacity: 1; } }
+@keyframes ani-error-login {
+  60% {
+    opacity: 0; } }
 .navbar {
   height: 70px;
   width: 100%;
@@ -263,23 +266,29 @@ End Mixin--------------------------------------------
     z-index: 100;
     background-color: #fff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+    .tab__nav__container {
+      display: flex; }
     @media screen and (max-width: 768px) {
       .tab__nav {
-        z-index: 199;
-        background: #eff1e2;
-        transform: translateX(100%);
-        transition: all 0.3s; }
-        .tab__nav--open {
-          transform: translateX(0); } }
+        background-color: transparent;
+        border-bottom: transparent; }
+        .tab__nav__container {
+          flex-direction: column;
+          width: 100%;
+          padding: 0; } }
     .tab__nav .nav-play-list {
       margin-bottom: 0;
       display: flex;
       flex-flow: wrap;
-      transition: height 0.5s; }
+      flex: 1;
+      transition: all 0.3s;
+      z-index: 199; }
       @media screen and (max-width: 768px) {
         .tab__nav .nav-play-list {
           justify-content: center;
           flex-direction: column;
+          transform: translateX(100%);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
           overflow: hidden; } }
       .tab__nav .nav-play-list__item {
         padding: 15px;
@@ -317,6 +326,59 @@ End Mixin--------------------------------------------
         @media screen and (max-width: 768px) {
           .tab__nav .nav-play-list__item {
             text-align: center; } }
+    .tab__nav .login-block {
+      position: relative;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center; }
+      .tab__nav .login-block__btn {
+        padding: 15px;
+        transition: all 0.5s; }
+        .tab__nav .login-block__btn a {
+          color: #000;
+          opacity: 0.5;
+          text-decoration: underline; }
+        .tab__nav .login-block__btn:hover {
+          background-color: #f5f5f5; }
+          .tab__nav .login-block__btn:hover a {
+            opacity: 1; }
+      .tab__nav .login-block__error {
+        position: absolute;
+        margin-left: 20px;
+        transform: translateX(100%);
+        width: 100px; }
+        .tab__nav .login-block__error::before {
+          position: absolute;
+          content: '';
+          display: block;
+          width: 5px;
+          height: 5px;
+          border-radius: 100%;
+          background-color: #f00;
+          top: 50%;
+          opacity: 1;
+          margin-left: -15px;
+          animation: ani-error-login 1s infinite; }
+        .tab__nav .login-block__error p {
+          margin-bottom: 0; }
+        @media screen and (max-width: 768px) {
+          .tab__nav .login-block__error {
+            transform: translateX(0);
+            position: static;
+            width: auto; } }
+        @media screen and (max-width: 480px) {
+          .tab__nav .login-block__error {
+            width: 100px; } }
+      @media screen and (max-width: 768px) {
+        .tab__nav .login-block {
+          width: 100%;
+          justify-content: flex-start;
+          background: #f7f7f7;
+          order: -1;
+          border-bottom: 1px solid #eee; } }
+    .tab__nav--open .nav-play-list {
+      background: #eff1e2;
+      transform: translateX(0); }
   .tab .song__container {
     top: 75px; }
     @media screen and (max-width: 480px) {
@@ -501,7 +563,7 @@ End Mixin--------------------------------------------
     display: flex;
     align-items: center;
     position: relative; }
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 768px) {
       .tab .users__item {
         flex-flow: wrap; } }
     .tab .users__item::before {
@@ -512,7 +574,7 @@ End Mixin--------------------------------------------
       left: 0;
       border-radius: 100%;
       background-color: #f5b043; }
-      @media screen and (max-width: 480px) {
+      @media screen and (max-width: 768px) {
         .tab .users__item::before {
           top: 20px; } }
     .tab .users__item__avt {
@@ -523,7 +585,7 @@ End Mixin--------------------------------------------
       flex-flow: wrap;
       width: 40%;
       margin-top: -6px; }
-      @media screen and (max-width: 480px) {
+      @media screen and (max-width: 768px) {
         .tab .users__item__info {
           flex-direction: column;
           align-items: flex-start;
@@ -552,7 +614,7 @@ End Mixin--------------------------------------------
     .tab .users__item__payment {
       width: 60%;
       margin-left: 20px; }
-      @media screen and (max-width: 480px) {
+      @media screen and (max-width: 768px) {
         .tab .users__item__payment {
           margin-left: 15px;
           margin-top: 10px; } }
@@ -582,47 +644,6 @@ End Mixin--------------------------------------------
           background-color: #a65e09; }
     .tab .users__item--active::before {
       background-color: #347a2a; }
-
-.login-block {
-  position: fixed;
-  width: calc(50% - 384px);
-  right: 0;
-  z-index: 198;
-  padding-top: 15px; }
-  .login-block__wrapper {
-    float: left; }
-    .login-block__wrapper a {
-      position: absolute;
-      transform: translateX(-100%);
-      background: aliceblue;
-      padding: 15px;
-      margin-top: -15px; }
-      @media screen and (max-width: 768px) {
-        .login-block__wrapper a {
-          transform: translateX(0);
-          position: static;
-          display: inline-block; } }
-  .login-block__error {
-    margin-left: 20px; }
-    .login-block__error::before {
-      position: absolute;
-      content: '';
-      display: block;
-      width: 5px;
-      height: 5px;
-      border-radius: 100%;
-      background-color: #ff0000;
-      top: 50%;
-      margin-left: -15px; }
-    .login-block__error p {
-      margin-bottom: 0; }
-    @media screen and (max-width: 768px) {
-      .login-block__error {
-        display: inline-block; } }
-  @media screen and (max-width: 768px) {
-    .login-block {
-      width: 100%;
-      background: #fff; } }
 
 .popup-lyric {
   position: fixed;
