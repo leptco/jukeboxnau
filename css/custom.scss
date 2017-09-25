@@ -1,3 +1,5 @@
+@charset 'UTF-8';
+
 /**
 variables
 **/
@@ -17,6 +19,7 @@ $color-gray: #808080;
 $color-lightgray: #d3d3d3;
 $color-black: #000;
 $color-brown: #a52a2a;
+$color-red: #ff0000;
 
 $color-1: #151513;
 $color-2: #0fa0ce;
@@ -26,6 +29,13 @@ $color-5: #49413f;
 $color-6: #eff1e2;
 $color-7: #a8896c;
 $color-8: #347a2a;
+$color-9: #eee;
+$color-10: #c3e9f5;
+$color-11: #3b94bf;
+$color-12: #4ca1ca;
+$color-13: #a9c52f;
+$color-14: #c08e52;
+$color-15: #a65e09;
 
 $tp-color-w-2: rgba(255, 255, 255, 0.2);
 $tp-color-w-3: rgba(255, 255, 255, 0.3);
@@ -130,6 +140,15 @@ Mixin--------------------------------------------
 End Mixin--------------------------------------------
 **/
 
+@keyframes ani-dot {
+	0% {
+		opacity: 0.5;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
 // navigation
 .navbar {
 	height: $navbar-h;
@@ -193,7 +212,8 @@ End Mixin--------------------------------------------
 		display: flex;
 	}
 
-	&__input[type='text'], &__submit {
+	&__input[type='text'],
+	&__submit {
 		border-color: transparent;
 		margin-bottom: 0;
 		background-color: transparent;
@@ -299,7 +319,8 @@ End Mixin--------------------------------------------
 	&--pause {
 		transform: rotate(180deg);
 
-		.play-button__top, .play-button__bottom {
+		.play-button__top,
+		.play-button__bottom {
 			opacity: 0;
 		}
 
@@ -345,6 +366,22 @@ End Mixin--------------------------------------------
 			&::after {
 				opacity: 1;
 				transform: translate(0) scaleX(1);
+			}
+		}
+	}
+
+	&--active {
+		.dot {
+			background-color: $color-13;
+			transition: all 0.3s;
+			animation: ani-dot 1s infinite;
+
+			&:hover {
+				background-color: $color-13;
+				&::after {
+					content: 'guest';
+					color: $color-13;
+				}
 			}
 		}
 	}
@@ -469,29 +506,74 @@ End Mixin--------------------------------------------
 			}
 		}
 
+		&__list {
+			@media screen and (max-width: $media-desktop) {
+				padding-top: 20px;
+			}
+		}
+
 		&__item {
 			display: flex;
-			flex-flow: wrap;
+			position: relative;
+			margin-left: 13px;
+
+			@media screen and (max-width: $media-desktop) {
+				flex-flow: wrap;
+				margin-bottom: 30px;
+			}
+
+			@media screen and (max-width: $media-tablet){
+				border-bottom: 1px solid $color-9;
+			}
 
 			&--playing {
-				.song__item__info > i {
+				.song__item__mark {
 					color: $color-brown;
 				}
 			}
 
 			&--selected {
-				.song__item__info > i {
+				.song__item__mark {
 					opacity: 0.5;
 				}
+			}
+
+			&__author {
+				position: absolute;
+				display: none;
+				top: 50%;
+				margin-left: -20px;
+				transform: translate(-100%, -50%);
+				@include text-overflow;
+
+				width: 150px;
+
+				@media screen and (max-width: $media-desktop) {
+					top: -25px;
+					transform: translate(0);
+					margin-left: 0;
+				}
+
+				&--active {
+					display: block;
+				}
+			}
+
+			&__mark {
+				position: absolute;
+				top: 20px;
+				transform: translateY(-50%);
+				margin-left: -13px;
 			}
 
 			&__info {
 				display: flex;
 				align-items: center;
-			}
+				margin-left: 0;
 
-			&__avt {
-				margin-left: 13px;
+				@media screen and (max-width: $media-tablet) and (min-width: $media-mobile) {
+					width: 50%;
+				}
 			}
 
 			&__link {
@@ -519,8 +601,16 @@ End Mixin--------------------------------------------
 						color: $color-3;
 					}
 				}
+
+				@media screen and (max-width: $media-tablet) and (min-width: $media-mobile) {
+					width: 50%;
+					margin-left: 0;
+				}
+
 				@media screen and (max-width: $media-mobile) {
 					justify-content: flex-start;
+					margin-left: -18px;
+					padding-bottom: 4px;
 				}
 			}
 
@@ -578,9 +668,8 @@ End Mixin--------------------------------------------
 			}
 
 			@media screen and (max-width: $media-mobile) {
-				&:nth-child(n) {
-					margin-left: 15px;
-				}
+				width: 100%;
+				margin-left: 0 !important;
 			}
 
 			&__img {
@@ -680,6 +769,10 @@ End Mixin--------------------------------------------
 			align-items: center;
 			position: relative;
 
+			@media screen and (max-width: $media-mobile) {
+				flex-flow: wrap;
+			}
+
 			&::before {
 				content: '';
 				width: 8px;
@@ -688,6 +781,10 @@ End Mixin--------------------------------------------
 				left: 0;
 				border-radius: 100%;
 				background-color: $color-4;
+
+				@media screen and (max-width: $media-mobile) {
+					top: 20px;
+				}
 			}
 
 			&__avt {
@@ -698,16 +795,23 @@ End Mixin--------------------------------------------
 			&__info {
 				display: flex;
 				flex-flow: wrap;
-				width: 80%;
+				width: 40%;
 				margin-top: -6px;
 				@media screen and (max-width: $media-mobile) {
 					flex-direction: column;
 					align-items: flex-start;
+					width: calc(100% - 80px);
 
 					.users__item__coin {
 						margin-left: 0;
 					}
 				}
+			}
+
+			&__user {
+				display: flex;
+				flex-flow: wrap;
+				width: 100%;
 			}
 
 			&__name {
@@ -730,12 +834,116 @@ End Mixin--------------------------------------------
 				}
 			}
 
+			&__payment {
+				width: 60%;
+				margin-left: 20px;
+
+				@media screen and (max-width: $media-mobile) {
+					margin-left: 15px;
+					margin-top: 10px;
+				}
+
+				form {
+					margin-bottom: 0;
+					display: flex;
+					align-items: flex-end;
+					font-size: 11px;
+
+					> div {
+						flex: 1;
+					}
+				}
+
+				&__input-wraper {
+					flex: 2;
+				}
+
+				&__label {
+					font-weight: 100;
+					text-transform: uppercase;
+				}
+
+				&__submit {
+					padding: 0 30px;
+					margin-left: 10px;
+					text-transform: uppercase;
+					border-color: $color-14;
+					background-color: $color-14;
+
+					@media screen and (max-width: $media-mobile) {
+						padding: 0 15px;
+					}
+
+					&:hover {
+						border-color: $color-15;
+						background-color: $color-15;
+					}
+				}
+			}
+
 			&--active {
 				&::before {
 					background-color: $color-8;
 				}
 			}
 		}
+	}
+}
+
+.login-block {
+	position: fixed;
+	$width: calc(50% - 384px);
+
+	width: $width;
+	right: 0;
+	z-index: 198;
+	padding-top: 15px;
+
+	&__wrapper {
+		float: left;
+
+		a {
+			position: absolute;
+			transform: translateX(-100%);
+			background: aliceblue;
+			padding: 15px;
+			margin-top: -15px;
+
+			@media screen and (max-width: $media-tablet) {
+				transform: translateX(0);
+				position: static;
+				display: inline-block;
+			}
+		}
+	}
+
+	&__error {
+		margin-left: 20px;
+
+		&::before {
+			position: absolute;
+			content: '';
+			display: block;
+			width: 5px;
+			height: 5px;
+			border-radius: 100%;
+			background-color: $color-red;
+			top: 50%;
+			margin-left: -15px;
+		}
+
+		p {
+			margin-bottom: 0;
+		}
+
+		@media screen and (max-width: $media-tablet) {
+			display: inline-block;
+		}
+	}
+
+	@media screen and (max-width: $media-tablet) {
+		width: 100%;
+		background: $color-white;
 	}
 }
 
@@ -766,8 +974,6 @@ End Mixin--------------------------------------------
 		width: 50vw;
 		height: 70vh;
 		transform: translate(-50%, -50%);
-		background-color: $color-white;
-		border-radius: 10px;
 		z-index: 2000;
 		overflow: hidden;
 		transition: all 0.5s;
@@ -776,10 +982,13 @@ End Mixin--------------------------------------------
 	&__header {
 		padding: 10px 15px;
 		text-align: center;
+		background-color: $color-12;
+		color: $color-white;
+		border-bottom: 3px solid $color-11;
 	}
 
 	&__close {
-		font-size: 30px;
+		font-size: 24px;
 		position: absolute;
 		top: 10px;
 		right: 15px;
@@ -795,6 +1004,7 @@ End Mixin--------------------------------------------
 		max-height: calc(70vh - #{$popup-lyric-h});
 		overflow-y: auto;
 		padding: 15px;
+		background-color: $color-10;
 	}
 
 	&__full {
