@@ -1,4 +1,4 @@
-/*eslint-disable key-spacing, header/header*/
+/*eslint-disable */
 module.exports = {
 	'root': true,
 	'extends': ['nau-react'],

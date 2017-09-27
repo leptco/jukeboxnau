@@ -5,7 +5,7 @@
   "scripts": {
     "stylelint": "stylelint css/**/*.scss",
     "eslint": "eslint --cache .",
-    "sass": "node-sass --source-map true --watch css/ --output css/",
+    "sass": "node-sass --source-map true --watch public/css/ --output public/css/",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
