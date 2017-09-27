@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import Navbar from './NavBar';
 
 export default class AppHeader extends Component {
+	state = { activeClasses: false };
 
+	toggleClass() {
+		const currentState = this.state.activeClasses;
+		this.setState({ activeClasses: !currentState });
+	}
 	render() {
 		return (
 			<header className="header">
@@ -21,7 +27,7 @@ export default class AppHeader extends Component {
 						<path
 							d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
 							fill="currentColor"
-							style={{ transformOrigin: "130px 106px" }}
+							style={{ transformOrigin: '130px 106px' }}
 							className="octo-arm"
 						/>
 						<path
@@ -32,55 +38,7 @@ export default class AppHeader extends Component {
 					</svg>
 				</a>
 				{/* /.github-corner */}
-				<nav className="navbar">
-					<div className="host host--active">
-						<div className="dot" />
-					</div>
-					{/* /.host */}
-					<div className="container">
-						<ul className="navbar__list">
-							<li className="navbar__item navbar__item-logo">
-								<a href="#">
-									<img
-										className="navbar__img"
-										src="images/nau-jukebox.svg"
-										alt="logo"
-									/>
-								</a>
-							</li>
-							{/* /.navbar__item navbar__item-logo */}
-							<li className="col col--7 navbar__item navbar__item--input">
-								<form action="#" className="search-box search-box--focus">
-									<div className="search-box__wrap">
-										<div className="search-box__input">
-											<input
-												type="text"
-												className="search-box__input"
-												placeholder="Search old song or add new NCT, Zing, YouTube, SoundClound URL"
-											/>
-										</div>
-										<button type="submit" className="search-box__submit">
-											SEARCH
-										</button>
-									</div>
-								</form>
-							</li>
-							{/* /.navbar__item navbar__item--input */}
-							<li className="navbar__item navbar__item--play">
-								<div className="play-button play-button--play">
-									<div className="play-button__item play-button__top" />
-									<div className="play-button__item play-button__right" />
-									<div className="play-button__item play-button__bottom" />
-									<div className="play-button__item play-button__left" />
-								</div>
-							</li>
-							{/* /.navbar__item navbar__item--play */}
-						</ul>
-						{/* /.navbar__list */}
-					</div>
-					{/* /.container */}
-				</nav>
-				{/* /.navbar */}
+				<Navbar openNav={this.state.activeClasses}/>
 			</header>
 		);
 	}
