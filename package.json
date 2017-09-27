@@ -6,10 +6,22 @@
     "stylelint": "stylelint css/**/*.scss",
     "eslint": "eslint --cache .",
     "sass": "node-sass --source-map true --watch css/ --output css/",
-    "start": "npm run sass"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
+    "react-scripts": "1.0.13"
   },
   "devDependencies": {
     "eslint": "^4.7.1",
+    "eslint-config-nau-react": "^15.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
     "node-sass": "^4.5.3",
     "stylelint": "^8.1.1",
     "stylelint-config-standard": "^17.0.0"
