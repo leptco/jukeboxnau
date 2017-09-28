@@ -3,11 +3,13 @@ import React, { Component } from 'react';
 class PopUpLyric extends Component {
 	render() {
 		return (
-			<section className="popup-lyric js-popup-lyric">
+			<section
+				onClick={this.props.closePopUp}
+				className={`popup-lyric ${this.props.openPopUp ? 'popup-lyric--active' : ''}`}>
 				<div className="popup-lyric__wrap">
 					<header className="popup-lyric__header">
 						<h4 className="popup-lyric__title">Lyric</h4>
-						<span className="popup-lyric__close js-popup-lyric-close">
+						<span className="popup-lyric__close" onClick={this.props.closePopUp}>
 							X
 						</span>
 					</header>

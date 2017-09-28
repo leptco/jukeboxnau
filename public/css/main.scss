@@ -452,8 +452,7 @@ End Mixin--------------------------------------------
 			display: flex;
 			flex-flow: wrap;
 			flex: 1;
-			transition: all 0.3s;
-			z-index: 199;
+			transition: transform 0.3s;
 
 			@media screen and (max-width: $media-tablet) {
 				justify-content: center;
@@ -461,6 +460,9 @@ End Mixin--------------------------------------------
 				transform: translateX(100%);
 				border-bottom: 1px solid $tp-color-b-1;
 				overflow: hidden;
+				margin-top: -1px;
+				height: 0;
+				z-index: 1;
 			}
 
 			&__item {
@@ -505,6 +507,8 @@ End Mixin--------------------------------------------
 				}
 
 				&--active {
+					z-index: 199;
+
 					&::after, a {
 						opacity: 1;
 					}
@@ -581,6 +585,7 @@ End Mixin--------------------------------------------
 				justify-content: flex-start;
 				background: $color-16;
 				order: -1;
+				z-index: 2;
 				border-bottom: 1px solid $color-9;
 			}
 		}
@@ -588,6 +593,7 @@ End Mixin--------------------------------------------
 		&--open {
 			.nav-play-list {
 				background: $color-6;
+				height: auto;
 				transform: translateX(0);
 			}
 		}
@@ -596,9 +602,6 @@ End Mixin--------------------------------------------
 	.song {
 		&__container {
 			top: $tabnav-h + 20px;
-			@media screen and (max-width: $media-mobile) {
-				top: 50px;
-			}
 		}
 
 		&__list {
@@ -725,9 +728,6 @@ End Mixin--------------------------------------------
 	.top-song {
 		&__container {
 			top: $tabnav-h + 30px;
-			@media screen and (max-width: $media-mobile) {
-				top: 42px;
-			}
 		}
 
 		&__list {
@@ -842,9 +842,6 @@ End Mixin--------------------------------------------
 	.users {
 		&__container {
 			top: $tabnav-h + 30px;
-			@media screen and (max-width: $media-mobile) {
-				top: 42px;
-			}
 		}
 
 		&__title {
