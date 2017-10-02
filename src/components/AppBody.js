@@ -8,6 +8,7 @@ import PopUpLyric from './PopUpLyric';
 
 class AppBody extends Component {
 	static propTypes = {
+		tabIndex: PropTypes.number.isRequired,
 		openNav: PropTypes.number,
 		switchTab: PropTypes.func,
 	}
@@ -63,6 +64,8 @@ class AppBody extends Component {
 	}
 
 	render() {
+		console.log('AppBody render, tabIndex', this.props.tabIndex);
+
 		return (
 			<main className="tab">
 				<button className="tab__collapse" onClick={this.activeTabnav}>

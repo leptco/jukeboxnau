@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'proptypes';
 
+import { changeTab } from '../events/AppActions';
 
 class TabNav extends Component {
 	static propTypes = {
@@ -9,6 +10,9 @@ class TabNav extends Component {
 
 	onTabClick = (e) => {
 		const index = e.currentTarget.dataset.index;
+
+		changeTab(index);
+
 		this.props.switchTab(index);
 	}
 	tabList = ['Play List', 'Yesterday', 'Last 7 day', 'Top Lists', 'Users'];
