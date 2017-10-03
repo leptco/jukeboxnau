@@ -9,7 +9,7 @@ class TabNav extends Component {
 	}
 
 	onTabClick = (e) => {
-		const index = e.currentTarget.dataset.index;
+		const index = parseInt(e.currentTarget.dataset.index);
 
 		changeTab(index);
 
@@ -20,7 +20,7 @@ class TabNav extends Component {
 		const lst = this.tabList.map((item, index) => (
 			<li
 				key={index} data-index={index}
-				className={`nav-play-list__item ${this.props.tabIndex === String(index) ? 'nav-play-list__item--active' : ''}`}
+				className={`nav-play-list__item ${this.props.tabIndex === index ? 'nav-play-list__item--active' : ''}`}
 				onClick={this.onTabClick}
 			>
 				<a href="#play-list">{item}</a>

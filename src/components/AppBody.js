@@ -6,9 +6,12 @@ import TabUsers from './TabUsers';
 import TabTopSong from './TabTopSong';
 import PopUpLyric from './PopUpLyric';
 
+
 class AppBody extends Component {
 	static propTypes = {
 		tabIndex: PropTypes.number.isRequired,
+		listSong: PropTypes.array,
+		deleteSong: PropTypes.func,
 		openNav: PropTypes.number,
 		switchTab: PropTypes.func,
 	}
@@ -49,9 +52,9 @@ class AppBody extends Component {
 		const index = parseInt(this.state.tabIndex, 10);
 		switch (index) {
 			case 0:
-				return (<TabSong openPopUp={this.activePopup} />);
+				return (<TabSong openPopUp={this.activePopup} listSong={this.props.listSong} deleteSong={this.props.deleteSong} />);
 			case 1:
-				return (<TabSong />);
+				return (<TabSong listSong={this.props.listSong} />);
 			case 2:
 				return (<TabSong />);
 			case 3:
@@ -64,7 +67,6 @@ class AppBody extends Component {
 	}
 
 	render() {
-		console.log('AppBody render, tabIndex', this.props.tabIndex);
 
 		return (
 			<main className="tab">
