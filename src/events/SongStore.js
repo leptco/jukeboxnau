@@ -27,19 +27,61 @@ class SongStore extends ReduceStore {
 	// built-in ReduceStore hook
 	getInitialState() {
 		return {
-			listSong: [{ id: 1, type: 1 }, { id: 2, type: 1 }, { id: 3, type: 2 }, { id: 4, type: 1 }],
+			listSong: [{ id: 1, type: 0, toggleUserBook: false }, { id: 2, type: 1, toggleUserBook: false }, { id: 3, type: 2, toggleUserBook: false }, { id: 4, type: 1, toggleUserBook: false }],
+			openPopUp: false,
 		};
 	}
 
-	deleteSong(id) {
-		let listSong = { ...this.getRootState('listSong') };
+	deleteSong(index) {
+		let listSong = [...this.getRootState('listSong')];
 		for (let i = 0, length = listSong.length; i < length; i++) {
-			if (listSong.indexOf(listSong[i].id) === id) {
+
+			if (i === index) {
 				listSong.splice(i, 1);
 				break;
 			}
 		}
-		console.log('new', listSong);
+
+		return listSong;
+	}
+
+	activeSong(id) {
+		let listSong = [...this.getRootState('listSong')];
+		for (let i = 0, length = listSong.length; i < length; i++) {
+
+			if (listSong[i].id === id) {
+				listSong.splice(i, 1);
+				break;
+			}
+		}
+
+		return listSong;
+	}
+
+	toggleUserBook(id) {
+		let listSong = [...this.getRootState('listSong')];
+		for (let i = 0, length = listSong.length; i < length; i++) {
+
+			if (listSong[i].id === id) {
+				listSong[i].toggleUserBook = !listSong[i].toggleUserBook;
+				break;
+			}
+		}
+
+		return listSong;
+	}
+
+	repeatSong(id) {
+		let listSong = [...this.getRootState('listSong')];
+		listSong.push({ id: listSong[listSong.length - 1].id + 1, type: 1, toggleUserBook: false });
+
+		return listSong;
+	}
+
+	addSong(link) {
+		let listSong = [...this.getRootState('listSong')];
+		listSong.push({ id: listSong[listSong.length - 1].id + 1, type: 1, toggleUserBook: false });
+
 		return listSong;
 	}
 
@@ -56,7 +98,31 @@ class SongStore extends ReduceStore {
 				reducedState = {
 					listSong: this.deleteSong(action.id),
 				};
-				console.log(reducedState.listSong);
+				break;
+			case AppActions.TOGGLE_USER_BOOK:
+				reducedState = {
+					listSong: this.toggleUserBook(action.id),
+				};
+				break;
+			case AppActions.REPEAT_SONG:
+				reducedState = {
+					listSong: this.repeatSong(action.id),
+				};
+				break;
+			case AppActions.ADD_SONG:
+				reducedState = {
+					listSong: this.addSong(action.link),
+				};
+				break;
+			case AppActions.OPEN_POP_UP:
+				reducedState = {
+					openPopUp: true,
+				};
+				break;
+			case AppActions.CLOSE_POP_UP:
+				reducedState = {
+					openPopUp: false,
+				};
 				break;
 			default:
 				console.log(action.type, 'does nothing');

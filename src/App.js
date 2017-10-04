@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import AppStore from './events/AppStore';
 import AppHeader from './components/AppHeader';
 import AppBody from './components/AppBody';
-import * as AppActions from './events/AppActions';
 
 function getAppState() {
 	// return {
@@ -34,8 +33,7 @@ class App extends Component {
 				<AppHeader />
 				<AppBody
 					tabIndex={this.state.tabIndex}
-					listSong={this.state.listSong}
-					deleteSong={this.state.listSong}
+					toggleBtnNav={this.state.toggleBtnNav}
 				/>
 
 			</div>

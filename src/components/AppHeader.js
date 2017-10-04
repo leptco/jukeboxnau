@@ -38,7 +38,7 @@ export default class AppHeader extends Component {
 					</svg>
 				</a>
 				{/* /.github-corner */}
-				<Navbar openNav={this.state.activeClasses}/>
+				<Navbar openNav={this.state.activeClasses} />
 			</header>
 		);
 	}

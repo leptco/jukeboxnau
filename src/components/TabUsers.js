@@ -28,7 +28,7 @@ class TabUsers extends Component {
 							</div>
 							{/* /.users__item__info */}
 							<div className="users__item__payment">
-								<form action="#" className>
+								<form action="#">
 									<div className="users__item__payment__input-wraper">
 										<label
 											htmlFor="users__item__payment__input"

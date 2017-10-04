@@ -1,20 +1,32 @@
 import React, { Component } from 'react';
-import PropTypes from 'proptypes';
-
-import { changeTab } from '../events/AppActions';
+import { Container } from 'flux/utils';
+import AppStore from '../events/AppStore';
+import { changeTab, signInUser } from '../events/AppActions';
 
 class TabNav extends Component {
-	static propTypes = {
-		switchTab: PropTypes.func,
+
+	static getStores() {
+		return [AppStore];
+	}
+
+	static calculateState(prevState) {
+		return {
+			isSignIn: AppStore.getState()['isSignIn'],
+			userName: AppStore.getState()['userName'],
+			errorSignIn: AppStore.getState()['errorSignIn'],
+			toggleBtnNav: AppStore.getState()['toggleBtnNav'],
+		};
 	}
 
 	onTabClick = (e) => {
-		const index = parseInt(e.currentTarget.dataset.index);
-
+		const index = parseInt(e.currentTarget.dataset.index, 10);
 		changeTab(index);
-
-		this.props.switchTab(index);
 	}
+
+	signInUser = (e) => {
+		signInUser('f');
+	}
+
 	tabList = ['Play List', 'Yesterday', 'Last 7 day', 'Top Lists', 'Users'];
 	_renderTabNav = () => {
 		const lst = this.tabList.map((item, index) => (
@@ -32,17 +44,20 @@ class TabNav extends Component {
 	render() {
 
 		return (
-			<nav className={`tab__nav ${this.props.openNav ? 'tab__nav--open' : ''}`}>
+			<nav className={`tab__nav ${this.state.toggleBtnNav ? 'tab__nav--open' : ''}`}>
 				<div className="container tab__nav__container">
 					<ul className="nav-play-list">
 						{this._renderTabNav()}
 					</ul>
 					{/* /.nav-play-list */}
 					<div className="login-block">
-						<div className="login-block__btn">
-							<a href="#play-list">Sign in</a>
+						<div
+							className="login-block__btn"
+							onClick={this.signInUser}
+						>
+							<a href="#play-list">{this.state.userName}</a>
 						</div>
-						<div className="login-block__error">
+						<div className={`login-block__error ${this.state.errorSignIn ? 'login-block__error--active' : ''}`}>
 							<p>Please login to book songs!</p>
 						</div>
 					</div>
@@ -54,4 +69,4 @@ class TabNav extends Component {
 	}
 }
 
-export default TabNav;
+export default Container.create(TabNav);

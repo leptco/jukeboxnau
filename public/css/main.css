@@ -140,6 +140,7 @@ End Mixin--------------------------------------------
   display: flex; }
 
 .search-box__input[type='text'], .search-box__submit {
+  border: 1px;
   border-color: transparent;
   margin-bottom: 0;
   background-color: transparent; }
@@ -267,6 +268,9 @@ End Mixin--------------------------------------------
 .host .dot:hover::after {
   opacity: 1;
   transform: translate(0) scaleX(1); }
+
+.host--active {
+  cursor: default; }
 
 .host--active .dot {
   background-color: #a9c52f;
@@ -415,7 +419,11 @@ End Mixin--------------------------------------------
   position: absolute;
   margin-left: 20px;
   transform: translateX(100%);
-  width: 100px; }
+  width: 100px;
+  display: none; }
+
+.tab__nav .login-block__error--active {
+  display: block; }
 
 .tab__nav .login-block__error::before {
   position: absolute;
@@ -836,6 +844,7 @@ End Mixin--------------------------------------------
   font-weight: 400; }
 
 /* stylelint-enable at-rule-no-unknown */
+/*# sourceMappingURL=main.css.map */
 /*# sourceMappingURL=main.css.map */
 
 /*# sourceMappingURL=main.css.map */

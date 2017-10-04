@@ -222,6 +222,7 @@ End Mixin--------------------------------------------
 
 	&__input[type='text'],
 	&__submit {
+		border: 1px;
 		border-color: transparent;
 		margin-bottom: 0;
 		background-color: transparent;
@@ -379,6 +380,8 @@ End Mixin--------------------------------------------
 	}
 
 	&--active {
+		cursor: default;
+
 		.dot {
 			background-color: $color-13;
 			transition: all 0.3s;
@@ -550,6 +553,11 @@ End Mixin--------------------------------------------
 				margin-left: 20px;
 				transform: translateX(100%);
 				width: 100px;
+				display: none;
+
+				&--active {
+					display: block;
+				}
 
 				&::before {
 					position: absolute;

@@ -4,6 +4,7 @@ import SearchBox from './SearchBox';
 import ButtonPlay from './ButtonPlay';
 
 class NavBar extends Component {
+
 	render() {
 		return (
 			<nav className="navbar">

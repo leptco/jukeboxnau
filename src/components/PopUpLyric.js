@@ -1,15 +1,35 @@
 import React, { Component } from 'react';
+import { Container } from 'flux/utils';
+import SongStore from '../events/SongStore';
+import { closePopUp } from '../events/AppActions';
 
 class PopUpLyric extends Component {
+	static getStores() {
+		return [SongStore];
+	}
+
+	static calculateState(prevState) {
+		return {
+			openPopUp: SongStore.getState()['openPopUp'],
+		};
+	}
+
+	closePopUp = () => {
+		closePopUp();
+	}
+
 	render() {
+		console.log(this.state.openPopUp);
+
 		return (
 			<section
-				onClick={this.props.closePopUp}
-				className={`popup-lyric ${this.props.openPopUp ? 'popup-lyric--active' : ''}`}>
+				onClick={this.closePopUp}
+				className={`popup-lyric ${this.state.openPopUp ? 'popup-lyric--active' : ''}`}
+			>
 				<div className="popup-lyric__wrap">
 					<header className="popup-lyric__header">
 						<h4 className="popup-lyric__title">Lyric</h4>
-						<span className="popup-lyric__close" onClick={this.props.closePopUp}>
+						<span className="popup-lyric__close" onClick={this.closePopUp}>
 							X
 						</span>
 					</header>
@@ -39,4 +59,4 @@ class PopUpLyric extends Component {
 	}
 }
 
-export default PopUpLyric;
+export default Container.create(PopUpLyric);
