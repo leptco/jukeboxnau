@@ -11,7 +11,9 @@ import { toggleBtnNav } from '../events/AppActions';
 class AppBody extends Component {
 	static propTypes = {
 		tabIndex: PropTypes.number.isRequired,
+		toggleBtnNav: PropTypes.bool.isRequired,
 	}
+
 
 	_renderTabItem = () => {
 		const index = this.props.tabIndex;
@@ -33,7 +35,7 @@ class AppBody extends Component {
 
 		return (
 			<main className="tab">
-				<button className="tab__collapse" onClick={toggleBtnNav}>
+				<button className={`tab__collapse ${this.props.toggleBtnNav ? 'tab__collapse--close' : ''}`} onClick={toggleBtnNav}>
 					<i className="fa fa-bars" aria-hidden="true" />
 				</button>
 				<TabNav

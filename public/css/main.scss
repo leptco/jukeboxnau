@@ -157,6 +157,16 @@ End Mixin--------------------------------------------
 	}
 }
 
+@keyframes ani-close-tabnav {
+	from { height: auto; }
+	to { height: 0; }
+}
+
+@keyframes ani-open-tabnav {
+	from { height: 0; }
+	to { height: auto; }
+}
+
 // navigation
 .navbar {
 	height: $navbar-h;
@@ -460,12 +470,19 @@ End Mixin--------------------------------------------
 			@media screen and (max-width: $media-tablet) {
 				justify-content: center;
 				flex-direction: column;
-				transform: translateX(100%);
+				transform: translateY(-100%);
 				border-bottom: 1px solid $tp-color-b-1;
 				overflow: hidden;
 				margin-top: -1px;
-				height: 0;
+				background: $color-6;
+				animation: ani-close-tabnav 3s ease-out forwards;
+				transition: all 0.3s ease-in-out 0.2s;
 				z-index: 1;
+
+				&--in {
+					animation: ani-open-tabnav 0.3s ease-out forwards;
+					transform: translateY(0);
+				}
 			}
 
 			&__item {
@@ -595,14 +612,6 @@ End Mixin--------------------------------------------
 				order: -1;
 				z-index: 2;
 				border-bottom: 1px solid $color-9;
-			}
-		}
-
-		&--open {
-			.nav-play-list {
-				background: $color-6;
-				height: auto;
-				transform: translateX(0);
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'flux/utils';
 import AppStore from '../events/AppStore';
-import { changeTab, signInUser } from '../events/AppActions';
+import { changeTab, signInUser, closeBtnNav } from '../events/AppActions';
 
 class TabNav extends Component {
 
@@ -44,12 +44,11 @@ class TabNav extends Component {
 	render() {
 
 		return (
-			<nav className={`tab__nav ${this.state.toggleBtnNav ? 'tab__nav--open' : ''}`}>
+			<nav className="tab__nav">
 				<div className="container tab__nav__container">
-					<ul className="nav-play-list">
+					<ul className={`nav-play-list ${this.state.toggleBtnNav ? 'nav-play-list--in' : ''}`}>
 						{this._renderTabNav()}
 					</ul>
-					{/* /.nav-play-list */}
 					<div className="login-block">
 						<div
 							className="login-block__btn"

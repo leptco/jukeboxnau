@@ -50,6 +50,7 @@ class AppStore extends ReduceStore {
 	signInUser(info) {
 		return ({ isSignIn: true, errorSignIn: false, userName: 'lepham' });
 	}
+
 	/**
 	 * Pure function, avoid mutate inputs
 	 * @param  {Object} state  Current state object

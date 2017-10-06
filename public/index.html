@@ -28,7 +28,6 @@
 	<link rel="icon" type="image/png" href="images/favicon.ico">
 	<!--Fotawesome-->
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<style>
 		::-webkit-input-placeholder {
 			color: rgba(0, 0, 0, 0.3);
@@ -58,32 +57,5 @@
 </head>
 <body>
 	<div id="root"></div>
-
-	<script>
-
-	$(document).ready(function() {
-
-		$('.js-tab__collapse').on('click', function() {
-			$('.tab__nav').toggleClass('tab__nav--open');
-			$(this).toggleClass('tab__collapse--close');
-		});
-
-		$('.js-song__item__lyric, .js-popup-lyric-close, .js-popup-lyric').on('click', function() {
-			$('.popup-lyric').addClass('popup-lyric--active');
-		});
-
-		$('.js-popup-lyric-close, .js-popup-lyric').on('click', function() {
-			$('.popup-lyric').removeClass('popup-lyric--active');
-		});
-
-		$('.js-song__item__remove').on('click', function() {
-			$(this).closest('li').empty();
-		});
-
-		$('.js-song__item__book-user').on('click', function() {
-			$(this).closest('li').find('.song__item__author').toggleClass('song__item__author--active');
-		});
-	});
-	</script>
 </body>
 </html>
