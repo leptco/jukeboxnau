@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Container } from 'flux/utils';
-import AppStore from '../events/AppStore';
+import UserStore from '../events/UserStore';
 import { activeHost } from '../events/AppActions';
 
 class Host extends Component {
 	static getStores() {
-		return [AppStore];
+		return [UserStore];
 	}
 
 	static calculateState(prevState) {
 		return {
-			activeHost: AppStore.getState()['activeHost'],
+			activeHost: UserStore.getState()['activeHost'],
 		};
 	}
 

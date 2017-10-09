@@ -14,7 +14,7 @@ import * as AppActions from './AppActions';
  * // to get a root object from the state tree
  * AppStore.getRootState('stateName')
  */
-class AppStore extends ReduceStore {
+class UserStore extends ReduceStore {
 	/**
 	 * Get state at the root property
 	 * @param  {String} stateName name of root state
@@ -27,11 +27,25 @@ class AppStore extends ReduceStore {
 	// built-in ReduceStore hook
 	getInitialState() {
 		return {
-			tabIndex: 0,
-			activeBtnPlay: false,
-			focusSearchBox: false,
-			toggleBtnNav: false,
+			listUser : [{ id: 1, toggleUser: false }, { id: 2, toggleUser: true }],
+			isSignIn: false,
+			errorSignIn: false,
+			userName: 'Sign in',
+			activeHost: false,
 		};
+	}
+
+	signInUser(info) {
+		return ({ isSignIn: true, errorSignIn: false, userName: 'lepham' });
+	}
+
+	activeHost(hostId) {
+		if (hostId === 110114) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -43,30 +57,28 @@ class AppStore extends ReduceStore {
 	reduce(state, action) {
 		let reducedState;
 		switch (action.type) {
-			case AppActions.CHANGE_TAB:
+			case AppActions.SIGN_IN_USER:
 				reducedState = {
-					tabIndex: action.tabIndex,
+					isSignIn: this.signInUser(action.info).isSignIn,
+					userName: this.signInUser(action.info).userName,
+					errorSignIn: this.signInUser(action.info).errorSignIn,
 				};
 				break;
-			case AppActions.ACTIVE_BTN_PLAY:
+			case AppActions.ERROR_SIGN_IN:
 				reducedState = {
-					activeBtnPlay: true,
+					errorSignIn: true,
 				};
 				break;
-			case AppActions.TOGGLE_BTN_PLAY:
-				reducedState = {
-					activeBtnPlay: !state.activeBtnPlay,
-				};
-				break;
-			case AppActions.FOCUS_SEARCH_BOX:
-				reducedState = {
-					focusSearchBox: action.isFocus,
-				};
-				break;
-			case AppActions.TOGGLE_BTN_NAV:
-				reducedState = {
-					toggleBtnNav: !state.toggleBtnNav,
-				};
+			case AppActions.ACTIVE_HOST:
+				if (!state.isSignIn) {
+					reducedState = {
+						errorSignIn: true,
+					};
+				} else {
+					reducedState = {
+						activeHost: this.activeHost(action.hostId),
+					};
+				}
 				break;
 			default:
 				console.log(action.type, 'does nothing');
@@ -79,6 +91,6 @@ class AppStore extends ReduceStore {
 }
 
 // This will create a singleton AppStore and register events trigger from AppDispatcher
-const instance = new AppStore(AppDispatcher);
+const instance = new UserStore(AppDispatcher);
 
 export default instance;

@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { Container } from 'flux/utils';
 import AppStore from '../events/AppStore';
+import UserStore from '../events/UserStore';
 import { changeTab, signInUser, closeBtnNav } from '../events/AppActions';
 
 class TabNav extends Component {
 
 	static getStores() {
-		return [AppStore];
+		return [AppStore, UserStore];
 	}
 
 	static calculateState(prevState) {
 		return {
-			isSignIn: AppStore.getState()['isSignIn'],
-			userName: AppStore.getState()['userName'],
-			errorSignIn: AppStore.getState()['errorSignIn'],
+			isSignIn: UserStore.getState()['isSignIn'],
+			userName: UserStore.getState()['userName'],
+			errorSignIn: UserStore.getState()['errorSignIn'],
 			toggleBtnNav: AppStore.getState()['toggleBtnNav'],
 		};
 	}

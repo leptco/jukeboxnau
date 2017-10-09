@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'proptypes';
 import { Container } from 'flux/utils';
 import AppStore from '../events/AppStore';
+import UserStore from '../events/UserStore';
 import SongStore from '../events/SongStore';
 import * as AppActions from '../events/AppActions';
 
@@ -11,14 +12,15 @@ class TabSong extends Component {
 	}
 
 	static getStores() {
-		return [SongStore, AppStore];
+		return [SongStore, AppStore, UserStore];
 	}
 
 	static calculateState(prevState) {
 		return {
 			listSong: SongStore.getState()['listSong'],
 			toggleBtnPlay: AppStore.getState()['toggleBtnPlay'],
-			isSignIn: AppStore.getState()['isSignIn'],
+			isSignIn: UserStore.getState()['isSignIn'],
+			activeHost: UserStore.getState()['activeHost'],
 		};
 	}
 
@@ -86,14 +88,20 @@ class TabSong extends Component {
 					{/* /.col col--4 song__item__info */}
 					<div className="col col--4 song__item__control">
 						<div className="song__item__time">4 hours ago</div>
-						<a
-							href="#"
-							className="song__item__book-user"
-							data-index={item.id}
-							onClick={this.toggleUserBook}
-						>
-							<i className="fa fa-eye" aria-hidden="true" />
-						</a>
+						{(() => {
+							if (this.state.activeHost) {
+								return (
+									<a
+										href="#"
+										className="song__item__book-user"
+										data-index={item.id}
+										onClick={this.toggleUserBook}
+									>
+										<i className="fa fa-eye" aria-hidden="true" />
+									</a>
+								);
+							}
+						})()}
 						<a
 							href="#"
 							className="song__item__lyric"
@@ -110,14 +118,20 @@ class TabSong extends Component {
 						>
 							<i className="fa fa-retweet" aria-hidden="true" />
 						</a>
-						<a
-							href="#"
-							className="song__item__remove"
-							data-index={index}
-							onClick={this.deleteSong}
-						>
-							<i className="fa fa-times" aria-hidden="true" />
-						</a>
+						{(() => {
+							if (this.state.activeHost) {
+								return (
+									<a
+										href="#"
+										className="song__item__remove"
+										data-index={index}
+										onClick={this.deleteSong}
+									>
+										<i className="fa fa-times" aria-hidden="true" />
+									</a>
+								);
+							}
+						})()}
 					</div>
 					{/* /.col col--4 song__item__control */}
 				</li>
